@@ -1,7 +1,8 @@
 const CACHE_NAME = 'dodgeball-v1';
 const ASSETS = [
   './',
-  './index.html'
+  './index.html',
+  './logo.png'
 ];
 
 self.addEventListener('install', (e) => {
