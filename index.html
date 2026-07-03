@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WDBF 躲避球官方專業計時器</title>
+    <title>WDBF Official Dodgeball Timer</title>
     <style>
         :root {
             --bg-color: #121212;
@@ -57,7 +57,7 @@
             max-height: 70px;
             max-width: 250px;
             object-fit: contain;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #aaa;
             letter-spacing: 3px;
@@ -198,7 +198,7 @@
             text-transform: uppercase;
             color: #aaa;
             font-weight: bold;
-            min-width: 120px;
+            min-width: 180px;
             text-align: left;
         }
 
@@ -242,19 +242,19 @@
 
     <div class="scoreboard-container" id="scoreboard">
         <div class="logo-container">
-            <img class="logo-placeholder" id="logo-img" src="" alt="DODGEBALL SCOREBOARD">
+            <img class="logo-placeholder" id="logo-img" src="logo.png" alt="DODGEBALL TIMER">
         </div>
-        <button class="btn-fullscreen" onclick="toggleFullscreen()">切換全螢幕模式 ⛶</button>
+        <button class="btn-fullscreen" onclick="toggleFullscreen()">Toggle Fullscreen ⛶</button>
         
         <div class="clock-card match-card">
             <div class="clock-label match-label">Match Clock</div>
             <div class="time-display" id="match-display">20:00</div>
             <div class="btn-group">
-                <button class="btn-adj" onclick="adjustTime('match', 60)">+1 分</button>
-                <button class="btn-adj" onclick="adjustTime('match', -60)">-1 分</button>
-                <button class="btn-adj" onclick="adjustTime('match', 5)">+5 秒</button>
-                <button class="btn-adj" onclick="adjustTime('match', -5)">-5 秒</button>
-                <button class="btn-sub" onclick="resetMatchClock()">重置比賽鐘</button>
+                <button class="btn-adj" onclick="adjustTime('match', 60)">+1 Min</button>
+                <button class="btn-adj" onclick="adjustTime('match', -60)">-1 Min</button>
+                <button class="btn-adj" onclick="adjustTime('match', 5)">+5 Sec</button>
+                <button class="btn-adj" onclick="adjustTime('match', -5)">-5 Sec</button>
+                <button class="btn-sub" onclick="resetMatchClock()">Reset Match</button>
             </div>
         </div>
 
@@ -262,38 +262,38 @@
             <div class="clock-label set-label">Set Clock</div>
             <div class="time-display" id="set-display">03:00</div>
             <div class="btn-group">
-                <button class="btn-adj" onclick="adjustTime('set', 60)">+1 分</button>
-                <button class="btn-adj" onclick="adjustTime('set', -60)">-1 分</button>
-                <button class="btn-adj" onclick="adjustTime('set', 5)">+5 秒</button>
-                <button class="btn-adj" onclick="adjustTime('set', -5)">-5 秒</button>
-                <button class="btn-sub" onclick="resetSetClock()">重置小局鐘</button>
+                <button class="btn-adj" onclick="adjustTime('set', 60)">+1 Min</button>
+                <button class="btn-adj" onclick="adjustTime('set', -60)">-1 Min</button>
+                <button class="btn-adj" onclick="adjustTime('set', 5)">+5 Sec</button>
+                <button class="btn-adj" onclick="adjustTime('set', -5)">-5 Sec</button>
+                <button class="btn-sub" onclick="resetSetClock()">Reset Set</button>
             </div>
         </div>
 
         <div class="master-controls">
             <div class="btn-group">
-                <button class="btn-main btn-start" id="start-btn" onclick="startTimers()">開始 (Start)</button>
-                <button class="btn-main btn-pause" id="pause-btn" onclick="pauseTimers()">暫停 (Pause)</button>
+                <button class="btn-main btn-start" id="start-btn" onclick="startTimers()">Start Play</button>
+                <button class="btn-main btn-pause" id="pause-btn" onclick="pauseTimers()">Pause Play</button>
             </div>
-            <div class="status-banner" id="status-text" style="color: #888;">準備就緒 (Ready)</div>
+            <div class="status-banner" id="status-text" style="color: #888;">Ready</div>
         </div>
 
         <div class="config-panel">
             <div class="config-section">
-                <div class="config-title">設定比賽鐘預設：</div>
+                <div class="config-title">Default Match Duration:</div>
                 <input type="number" id="input-match-min" class="config-input" value="20" min="0" max="99">
-                <span style="color:#aaa">分</span>
+                <span style="color:#aaa">Min</span>
                 <input type="number" id="input-match-sec" class="config-input" value="0" min="0" max="59">
-                <span style="color:#aaa">秒</span>
-                <button class="btn-apply" onclick="applyCustomMatchTime()">套用</button>
+                <span style="color:#aaa">Sec</span>
+                <button class="btn-apply" onclick="applyCustomMatchTime()">Apply</button>
             </div>
             <div class="config-section">
-                <div class="config-title">設定小局鐘預設：</div>
+                <div class="config-title">Default Set Duration:</div>
                 <input type="number" id="input-set-min" class="config-input" value="3" min="0" max="99">
-                <span style="color:#aaa">分</span>
+                <span style="color:#aaa">Min</span>
                 <input type="number" id="input-set-sec" class="config-input" value="0" min="0" max="59">
-                <span style="color:#aaa">秒</span>
-                <button class="btn-apply" onclick="applyCustomSetTime()">套用</button>
+                <span style="color:#aaa">Sec</span>
+                <button class="btn-apply" onclick="applyCustomSetTime()">Apply</button>
             </div>
         </div>
     </div>
@@ -352,7 +352,7 @@
             if (isRunning) return;
             if (matchTime <= 0 && setTime <= 0) return;
             isRunning = true;
-            statusText.textContent = "比賽進行中 (Live Play)";
+            statusText.textContent = "Live Play";
             statusText.style.color = "#00e676";
             countdownInterval = setInterval(() => {
                 if (matchTime > 0) matchTime--;
@@ -366,7 +366,7 @@
             if (!isRunning) return;
             clearInterval(countdownInterval);
             isRunning = false;
-            statusText.textContent = "比賽暫停 (Play Paused)";
+            statusText.textContent = "Play Paused";
             statusText.style.color = "#ff3d00";
         }
 
@@ -375,20 +375,19 @@
 
         function checkExpirations() {
             bodyNode.classList.remove('flash-match-expired', 'solid-red-bg', 'flash-both-expired');
-            if (matchTime === 0 && setTime === 0) { bodyNode.classList.add('flash-both-expired'); statusText.textContent = "比賽與小局皆結束！"; } 
-            else if (matchTime === 0) { bodyNode.classList.add('flash-match-expired'); statusText.textContent = "半場比賽結束！"; } 
-            else if (setTime === 0) { bodyNode.classList.add('solid-red-bg'); statusText.textContent = "單局時間到！"; }
+            if (matchTime === 0 && setTime === 0) { bodyNode.classList.add('flash-both-expired'); statusText.textContent = "Match & Set Expired!"; } 
+            else if (matchTime === 0) { bodyNode.classList.add('flash-match-expired'); statusText.textContent = "Match Half Finished!"; } 
+            else if (setTime === 0) { bodyNode.classList.add('solid-red-bg'); statusText.textContent = "Set Clock Over!"; }
         }
 
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => { alert(`無法啟動全螢幕模式: ${err.message}`); });
+                document.documentElement.requestFullscreen().catch(err => { alert(`Fullscreen failed: ${err.message}`); });
             } else { document.exitFullscreen(); }
         }
 
-        // 註冊 Service Worker 實現 100% 離線可用
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW registration failed', err));
+            navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW failed', err));
         }
 
         updateDisplays();
